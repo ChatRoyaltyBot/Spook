@@ -1,0 +1,9 @@
+.env
+.dev
+.vscode/
+package-lock.json
+node_modules/
+.secret
+src/commands/hidden/test.js
+src/daemon/
+.testcommands

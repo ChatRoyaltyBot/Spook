@@ -1,0 +1,24 @@
+{
+  "name": "Spook",
+  "codeName": "Chat Royalty Discord Bot",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/node": "^17.0.31",
+    "diagnostics_channel": "^1.1.0",
+    "discord.js": "^13.8.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.18.1",
+    "mongoose": "^6.3.2",
+    "node-fetch": "^3.2.4",
+    "node-windows": "1.0.0-beta.6",
+    "read-last-lines": "^1.8.0"
+  }
+}
