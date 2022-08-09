@@ -12,7 +12,7 @@ async function checkAutoRoles(client, message) {
             member.roles.add(pr.roleID)
             const role = message.guild.roles.cache.get(pr.roleID)
             const roleName = role.name || pr.roleID
-            let msg = `Congratulations <@${member.id}> :tada:, you have received the following role: ${roleName}`
+            let msg = `Congratulations <@${member.id}> :tada:, you have received the following role: \`${roleName}\``
             await message.channel.send(msg)
         }
     }
