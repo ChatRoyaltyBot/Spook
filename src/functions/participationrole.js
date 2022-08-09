@@ -1,13 +1,13 @@
 const ParticipationRole = require('../_database/models/participationRoleSchema')
 
 async function checkAutoRoles(client, message) {
-    let role = await ParticipationRole.findOne({
+    let pr = await ParticipationRole.findOne({
         guildID: message.guild.id,
         channelID: message.channel.id
     })
     const member = message.member
 
-    if (!!role) {
+    if (!!pr) {
         if (!member.roles.cache.has(role.roleID)) {
             member.roles.add(role.roleID)
             const role = message.guild.roles.cache.get(r.roleID)
