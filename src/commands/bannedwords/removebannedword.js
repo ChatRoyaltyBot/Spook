@@ -1,3 +1,4 @@
+const { addLog } = require('../../functions/logs');
 const BannedWord = require('../../_database/models/bannedWordSchema')
 
 module.exports = {

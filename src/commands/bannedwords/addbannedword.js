@@ -1,3 +1,4 @@
+const { addLog } = require('../../functions/logs');
 const mongoose = require('mongoose')
 const BannedWord = require('../../_database/models/bannedWordSchema')
 
