@@ -48,7 +48,27 @@ module.exports = {
         // Check for participation roles and assign them
         await client.functions.get("participationrole").checkAutoRoles(client, message)
         
-        if (!message.content.startsWith(prefix)) return
+        if (!message.content.startsWith(prefix)) {
+            const BannedWord = require('../_database/models/bannedWordSchema')
+            let bw = await BannedWord.find({
+                guildID: message.guild.id
+            })
+
+            let hasBannedWord = false
+
+            await bw.forEach(async entry => {
+                if (hasBannedWord) return
+                hasBannedWord = message.content.toLowerCase().includes(entry.bannedWord)
+            })
+            if (hasBannedWord) {
+                try {
+                    await message.delete()
+                } catch (error) {
+                    // message might have been deleted, just ignore
+                }
+            }
+            return
+        }
 
         const cmdstr = args.shift().toLowerCase()
 
