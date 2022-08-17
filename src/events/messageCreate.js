@@ -13,7 +13,7 @@ module.exports = {
 
         if (!message.guild) return
 
-        let mentionedBot = (message.mentions.members.first()?.id === client.user.id)
+        let mentionedBot = (message.content.trim().startsWith(`<@${client.user.id}>`))
 
         let member = message.member
         let userPermLevel = getPermissionLevel(member)
