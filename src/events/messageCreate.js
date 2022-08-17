@@ -13,6 +13,8 @@ module.exports = {
 
         if (!message.guild) return
 
+        let mentionedBot = (message.mentions.members.first()?.id === client.user.id)
+
         let member = message.member
         let userPermLevel = getPermissionLevel(member)
 
@@ -67,7 +69,13 @@ module.exports = {
                     // message might have been deleted, just ignore
                 }
             }
-            return
+        }
+
+        if (!message.content.startsWith(prefix) && !mentionedBot) return
+        if (mentionedBot) {
+            args.shift()
+            if (args.length === 0)
+                return message.reply(`Prefix for this server is set to \`${prefix}\``)
         }
 
         const cmdstr = args.shift().toLowerCase()
