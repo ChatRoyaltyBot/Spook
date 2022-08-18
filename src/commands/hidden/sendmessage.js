@@ -8,6 +8,10 @@ module.exports = {
         let param = args.join(" ").split("|")
 
         await message.delete()
-        await client.channels.cache.get(param[0])?.send({content: param[1]})
+
+        if (param.length === 1)
+            await message.channel.send({ content: param[0] })
+        else
+            await client.channels.cache.get(param[0])?.send({ content: param[1] })
     }
 }
