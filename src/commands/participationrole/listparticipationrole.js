@@ -5,7 +5,7 @@ module.exports = {
     name: "listparticipationrole",
     aliases: ["lpr"],
     category: "participationrole",
-    permissions: 20,
+    cmdpermissions: 20,
     description: 'Lists all channel Participation roles',
     usage: "[channelID]",
     run: async ({ client, message, args }) => {

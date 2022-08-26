@@ -5,7 +5,7 @@ module.exports = {
     name: "listbannedwords",
     aliases: ["lbw"],
     category: "bannedwords",
-    permissions: 20,
+    cmdpermissions: 20,
     description: 'Lists all banned words',
     run: async ({ client, message, args }) => {
 
