@@ -8,3 +8,4 @@
 
 2022-09-29: v2.0.0
 - DiscordJS v14 upgrade
+- bigmoji function
