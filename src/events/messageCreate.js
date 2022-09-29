@@ -49,7 +49,7 @@ module.exports = {
 
         // Check for participation roles and assign them
         await client.functions.get("participationrole").checkAutoRoles(client, message)
-        
+
         if (!message.content.startsWith(prefix)) {
             const BannedWord = require('../_database/models/bannedWordSchema')
             let bw = await BannedWord.find({
@@ -75,7 +75,12 @@ module.exports = {
         if (mentionedBot) {
             args.shift()
             if (args.length === 0)
-                return message.reply(`Prefix for this server is set to \`${prefix}\``)
+                try {
+                    return message.reply(`Prefix for this server is set to \`${prefix}\``)
+                } catch (error) {
+                    // probably no permissions to send messages in channel... Don't crash
+                    addLog(message.channel, error, error.stack)
+                }
         }
 
         const cmdstr = args.shift().toLowerCase()
