@@ -18,7 +18,7 @@ module.exports = async (bot, forceGlobal) => {
 
             client.rest.put(Routes.applicationCommands(client.user.id), { body: [...toAnnounce.values()] })
                 .then((data) => console.log(`Successfully registered ${data.length} global application commands.`))
-                .catch((err) => addLog(null, err, err.stack));
+                .catch((err) => addLog(err, err.stack));
         }
     }
     console.log("Finished announcing slash command")
