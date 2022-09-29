@@ -8,7 +8,7 @@ module.exports = {
     usage: "<channel>|<messageID>|<color>|<title>|<message>",
     run: async ({ client, message, args }) => {
         let param = args.join(" ").split("|")
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
             .setColor(param[2])
             .setTitle(param[3])
             .setDescription(param[4])

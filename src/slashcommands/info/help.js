@@ -30,8 +30,8 @@ function getAll(client, interaction) {
     });
 
     //FIX change image to bot pfp auto link
-    var em = new Discord.MessageEmbed()
-        .setColor("RANDOM")
+    var em = new Discord.EmbedBuilder()
+        .setColor(Discord.Colors.Blurple)
         .setAuthor({
             name: "Bot Commands",
             iconURL: client.user.displayAvatarURL()
@@ -50,13 +50,13 @@ function getAll(client, interaction) {
     return em
 }
 function getCMD(client, input) {
-    const embed = new Discord.MessageEmbed();
+    const embed = new Discord.EmbedBuilder();
     const cmd =
         client.slashcommands.get(input.toLowerCase())
     let info = `No information found for command **${input.toLowerCase()}**`;
     if (!cmd)
         //no specified command
-        return embed.setColor("RED").setDescription(info)
+        return embed.setColor(Discord.Colors.Red).setDescription(info)
 
     if (cmd.name) info = `**Command name**: ${cmd.name}`;
     if (cmd.description) info += `\n**Description**: ${cmd.description}`;
@@ -69,8 +69,8 @@ function getCMD(client, input) {
             if (!option.required) {
                 bstr = "["
                 estr = "]"
-            } 
-            let choices = ` - ${option.type}`
+            }
+            let choices = ` - ${ApplicationCommandOptionType[option.type]}`
             if (option.choices) {
                 choices = ` - ${option.choices.map(c => c.name).join(' / ')}`
             }
@@ -82,7 +82,7 @@ function getCMD(client, input) {
         info += `\n**Parameters**: ${options}`     
         embed.setFooter({ text: `Syntax: <> = required, [] = optional` });
     }
-    return embed.setColor("GREEN").setDescription(info)
+    return embed.setColor(Discord.Colors.Green).setDescription(info)
 }
 
 
@@ -90,11 +90,12 @@ module.exports = {
     name: "help",
     description: "Spook help, returns all slash commands, or one specific slash command's info",
     category: "info",
+    global: true,
     options: [
         {
             name: "command",
             description: "The command you want info on.",
-            type: "STRING",
+            type: Discord.ApplicationCommandOptionType.String,
             required: false
         },
     ],

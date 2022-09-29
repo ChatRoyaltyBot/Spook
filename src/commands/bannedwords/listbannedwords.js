@@ -23,7 +23,7 @@ module.exports = {
             return await message.reply('No banned words set up on server.')
         }
 
-        let embed = new Discord.MessageEmbed()
+        let embed = new Discord.EmbedBuilder()
             .setColor("#8DC685")
             .setTitle("Banned words")
             .setDescription(printData.join("\n"))

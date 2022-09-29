@@ -5,3 +5,6 @@
 - Better user resolve on mentions
 - Allow bot mention to run commands
 - Better channel / role resolve on mentions
+
+2022-09-29: v2.0.0
+- DiscordJS v14 upgrade
