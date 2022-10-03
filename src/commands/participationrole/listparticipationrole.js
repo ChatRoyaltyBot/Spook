@@ -29,7 +29,7 @@ module.exports = {
             const channel = message.guild.channels.cache.get(entry.channelID)
             const channelName = channel.name || entry.channelID
             const role = message.guild.roles.cache.get(entry.roleID)
-            const roleName = role.name || entry.roleID
+            const roleName = role?.name || entry.roleID
             printData.push([`#${channelName}`, `@${roleName}`])
         })
 
