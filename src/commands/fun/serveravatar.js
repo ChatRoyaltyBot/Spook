@@ -8,6 +8,10 @@ module.exports = {
         const { resolveMember } = require('../../functions/parameters');
         let targetMember = await resolveMember(message, args[0], true)
 
-        message.channel.send(targetMember.avatarURL({ size: 256, dynamic: true }))
+        let serveravatar = targetMember.avatarURL({ size: 256, dynamic: true })
+        if (!!serveravatar)
+            return await message.channel.send(serveravatar)
+
+        return await message.channel.send(targetMember.user.displayAvatarURL({ size: 256, dynamic: true }))
     }
 }
