@@ -9,7 +9,7 @@ module.exports = {
     run: async ({ client, message, args }) => {
         let guildSettings = await client.functions.get("functions").getGuildSettings(message.guild.id)
 
-        const properties = ["prefix"]
+        const properties = ["prefix","voicechannelid"]
 
         if (!args.length) {
             let embed = new Discord.EmbedBuilder()
@@ -18,6 +18,7 @@ module.exports = {
                 .setDescription(`If nothing is shown, there are no properties assigned\nProperties: ${properties.join(", ")}`)
 
             if (!!guildSettings.prefix) embed.addFields({name: "Prefix", value: guildSettings.prefix})
+            if (!!guildSettings.voiceChannelID) embed.addFields({name: "Voice Channel", value: `<#${guildSettings.voiceChannelID}>`})
 
             embed = client.functions.get("functions").setEmbedFooter(embed, client)
 
@@ -34,6 +35,10 @@ module.exports = {
 
             if ("prefix" === args[0]) {
                 guildSettings.prefix = newValue
+                await guildSettings.save()
+            }
+            if ("voicechannelid" === args[0]) {
+                guildSettings.voiceChannelID = newValue
                 await guildSettings.save()
             }
 
