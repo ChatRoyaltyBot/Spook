@@ -22,6 +22,7 @@
     "mongoose": "^6.8.0",
     "node-fetch": "^3.3.0",
     "node-windows": "1.0.0-beta.8",
-    "read-last-lines": "^1.8.0"
+    "read-last-lines": "^1.8.0",
+    "ytdl-core": "^4.11.2"
   }
 }

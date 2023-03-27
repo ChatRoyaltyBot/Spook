@@ -1,13 +1,14 @@
-const { joinVoiceChannel, createAudioPlayer, createAudioResource, NoSubscriberBehavior, AudioPlayerStatus } = require('@discordjs/voice')
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, NoSubscriberBehavior, StreamType, AudioPlayerStatus, demuxProbe } = require('@discordjs/voice')
 const { getGuildSettings } = require("../../functions/functions")
-const fs = require("fs")
-const path = require("path");
+
 module.exports = {
-    name: "play",
+    name: "youtube",
     category: "audio",
     description: 'play sound',
-    usage: '[index]',
+    usage: '<url>',
     run: async ({ client, message, args }) => {
+
+        let url = args.join(' ')
 
         const settings = await getGuildSettings(message.guild.id)
         if (!settings.voiceChannelID) {
@@ -28,16 +29,18 @@ module.exports = {
             adapterCreator: message.guild.voiceAdapterCreator,
         });
 
-        let files = fs.readdirSync('./audio/');
-        let index = args[0]
-        if (isNaN(index)) {
-            index = Math.floor(Math.random() * files.length)
-        }
-        const file = path.resolve('./audio/', files[index]);
+        // const play = require('discordjs-ytdl')
+        // play.play(connection, 'https://www.youtube.com/watch?v=mmr7SSi4aW4', 'AIzaSyDKAiYRZ0GH23WQV1Eow2GsEVrfdkEtpp4')
 
-        const resource = createAudioResource(file, { inlineVolume: true });
-        player.play(resource);
-        connection.subscribe(player);
+        let ytdl = require("ytdl-core")
+        if (!url)
+        url = 'https://www.youtube.com/watch?v=00I6JCz5tvI'
+        const audio = ytdl(url, { filter : 'audioonly' });
+        const { stream, type } = await demuxProbe(audio);
+        const resource = createAudioResource(stream, { inputType: type, inlineVolume: true});
+        resource.volume.setVolume(0.5)
+        player.play(resource)
+        connection.subscribe(player)
 
         player.on(AudioPlayerStatus.Idle, () => {
             player.stop();

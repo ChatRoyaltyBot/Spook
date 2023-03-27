@@ -9,7 +9,7 @@ module.exports = {
         let player = client.audioPlayers.get(message.guild.id)
 
         const settings = await getGuildSettings(message.guild.id)
-        if (!!settings.shopResetChannelID) {
+        if (!settings.voiceChannelID) {
             message.reply("No Voice Channel set up. Use settings to initialize it.")
             return
         }
