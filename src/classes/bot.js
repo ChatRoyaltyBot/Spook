@@ -26,7 +26,8 @@ class Bot {
                 Discord.GatewayIntentBits.GuildMembers,
                 Discord.GatewayIntentBits.MessageContent,
                 Discord.GatewayIntentBits.GuildMessages,
-                Discord.GatewayIntentBits.GuildMessageReactions
+                Discord.GatewayIntentBits.GuildMessageReactions,
+                Discord.GatewayIntentBits.GuildVoiceStates
             ],
             partials: [
                 Discord.Partials.Reaction
@@ -42,6 +43,7 @@ class Bot {
         this.client.categories = fs.readdirSync("./src/commands/");
         this.client.slashcategories = fs.readdirSync("./src/slashcommands/");
         this.client.pinglistsLastSent = new Discord.Collection()
+        this.client.audioPlayers = new Discord.Collection()
 
         this.client.loadEvents = (bot, reload) => require("../handlers/events")(bot, reload)
         this.client.loadEvents(this, false)
